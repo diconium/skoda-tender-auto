@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/music_widget_ly"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/art_iv"
+        android:layout_width="@dimen/media_art_width"
+        android:layout_height="@dimen/media_art_width"
+        android:layout_below="@+id/appwidget_title"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:background="#ddd"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_audio_track" />
+
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/art_iv"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/art_iv"
+        android:text="Vaa Vaathi mp3 Song"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/playlist_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_tv"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@+id/art_iv"
+        android:text="Tamil Songs"
+        android:textColor="@color/white"
+        android:textSize="19sp" />
+
+    <LinearLayout
+        android:id="@+id/control_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/playlist_tv"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/art_iv"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/wid_prev_iv"
+            android:layout_width="@dimen/widget_media_btn"
+            android:layout_height="@dimen/widget_media_btn"
+            android:src="@drawable/ic_skip_previous" />
+
+        <ImageView
+            android:id="@+id/wid_play_iv"
+            android:layout_width="@dimen/widget_media_btn"
+            android:layout_height="@dimen/widget_media_btn"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_pause" />
+
+        <ImageView
+            android:id="@+id/wid_next_iv"
+            android:layout_width="@dimen/widget_media_btn"
+            android:layout_height="@dimen/widget_media_btn"
+            android:src="@drawable/ic_skip_next" />
+
+    </LinearLayout>
+
+</RelativeLayout>
