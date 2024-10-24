@@ -1,6 +1,7 @@
 package com.skoda.launcher.ui.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,6 +9,7 @@ import com.skoda.launcher.core.BaseViewModel
 import com.skoda.launcher.data.source.response.ApiResult
 import com.skoda.launcher.data.source.response.Subscriptions
 import com.skoda.launcher.data.source.response.VehicleResponse
+import com.skoda.launcher.domain.usecase.DriverDistractionUseCase
 import com.skoda.launcher.domain.usecase.SubscriptionsUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,6 +26,9 @@ class ServiceViewModel(application: Application) : BaseViewModel(application) {
 
     @Inject
     lateinit var storiesUseCase: SubscriptionsUseCase
+
+    @Inject
+    lateinit var driverDistractionUseCase: DriverDistractionUseCase
 
     init {
         mainApplication.component.inject(this)
@@ -55,5 +60,16 @@ class ServiceViewModel(application: Application) : BaseViewModel(application) {
                 stories = values.data?.subscriptions
                 responseSubscriptions.value = values
             }
+        getDriver()
+    }
+
+    fun getDriver() {
+        driverDistractionUseCase.getCarDrivingState().observeForever {
+            Log.i("TAG", "getDriver:getCarDrivingState "+it)
+        }
+
+        driverDistractionUseCase.getCarUxRestrictions().observeForever {
+            Log.i("TAG", "getDriver:getCarUxRestrictions "+it)
+        }
     }
 }

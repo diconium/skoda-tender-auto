@@ -11,4 +11,10 @@
     <string name="expires_in_day">Expires in %1$d day</string>
     <string name="expires_on_date">Expires on %1$s</string>
     <string name="app">APP</string>
+
+
+    <string name="description_pay_to_park">Now you can pay your parking fees conveniently from your vehicle. Pay to Park automatically finds the nearest parking zone for you - all you have to do is select the desired parking duration. \n\nYour subscription expires on 03.11.24. You can extend your at any time.</string>
+    <string name="parking_fee_description">pay for your parking fee \nfrom the confort of your vehicle</string>
+    <string name="pay_to_park">Pay to park</string>
+
 </resources>

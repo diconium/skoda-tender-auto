@@ -160,7 +160,7 @@ class ServiceListFragment :
             ServiceListAdapter(subscriptions, object : ServiceListAdapter.ServiceClickListener {
                 override fun onClickItem(subscriptions: Subscriptions) {
                     requireActivity().supportFragmentManager.beginTransaction()
-                        .add(R.id.fragment_container, ServicePurchaseFragment()).commit()
+                        .add(R.id.fragment_container, ServiceDetailFragment()).commit()
                 }
             })
         mBinding.serviceListRv.adapter = serviceListAdapter

@@ -19,6 +19,8 @@ import com.skoda.launcher.data.source.remote.TelematicsApiService
 import com.skoda.launcher.data.source.remote.SubscriptionsApi
 import com.skoda.launcher.utils.convertor.DateDeserializer
 import java.util.Date
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLSession
 
 
 @Module
@@ -42,7 +44,8 @@ class NetModule {
         return OkHttpClient.Builder()
                 .readTimeout(1, TimeUnit.MINUTES)
                 .writeTimeout(1, TimeUnit.MINUTES)
-                .build()
+                .hostnameVerifier({ hostname: String?, session: SSLSession? -> true }) // Disable hostname verification
+            .build()
     }
 
     @Provides

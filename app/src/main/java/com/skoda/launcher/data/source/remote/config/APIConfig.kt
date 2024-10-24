@@ -9,7 +9,7 @@ object APIConfig {
     /**
      * The base URL for the API.
      */
-    const val API_URL: String = "http://18.156.191.202:8080/"
+    const val API_URL: String = "http://skoda-services-dev-1394477866.eu-central-1.elb.amazonaws.com/"
 
     /**
      * A sample Vehicle Identification Number (VIN) used for testing or as a default value.

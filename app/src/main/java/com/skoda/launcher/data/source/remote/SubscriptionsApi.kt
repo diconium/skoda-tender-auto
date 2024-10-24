@@ -20,5 +20,8 @@ interface SubscriptionsApi {
      * @return A [Response] containing [VehicleResponse] with the subscription data.
      */
     @GET("subscriptions/{vin}/status")
-    suspend fun getSubscriptions(vin: String): Response<VehicleResponse>
+    suspend fun getSubscriptions(@Path("vin") vin: String): Response<VehicleResponse>
+
+   /* @GET("https://jsonkeeper.com/b/G057")
+    suspend fun getSubscriptions(): Response<VehicleResponse>*/
 }

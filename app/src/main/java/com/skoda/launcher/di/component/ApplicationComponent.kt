@@ -7,6 +7,7 @@ import com.skoda.launcher.di.component.di.UseCaseModule
 import  com.skoda.launcher.di.component.di.DataSourceModule
 import com.skoda.launcher.di.module.ApplicationModule
 import com.skoda.launcher.di.module.DatabaseModule
+import com.skoda.launcher.di.module.DriverDistractionModule
 import com.skoda.launcher.ui.viewmodel.CarViewModel
 import com.skoda.launcher.di.module.NetModule
 import com.skoda.launcher.ui.fragment.ServiceListFragment
@@ -28,7 +29,8 @@ import javax.inject.Singleton
         DatabaseModule::class,
         UseCaseModule::class,
         DataSourceModule::class,
-        RepositoryModule::class
+        RepositoryModule::class,
+        DriverDistractionModule::class
     ]
 )
 interface ApplicationComponent {

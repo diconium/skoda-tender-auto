@@ -1,5 +1,6 @@
 package com.skoda.launcher.ui.activity
 
+import android.car.Car
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,5 +14,8 @@ class ServiceActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().add(R.id.fragment_container, ServiceListFragment()).commit()
         }
+
+        var car = Car.createCar(this)
+        // DriverDistractionManager.init(this, car)
     }
 }
