@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -29,6 +30,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/sub_service_bg"
+                app:layout_constraintBottom_toBottomOf="@+id/service_art_iv"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"/>
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -45,17 +53,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
-                android:text="APP"
+                android:text="@string/app"
                 android:textColor="#ADB1B4"
                 app:layout_constraintTop_toBottomOf="@+id/service_art_iv" />
 
             <TextView
+                android:fontFamily="@font/skoda_next_bold"
                 android:id="@+id/service_title_iv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="70dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
-                android:text="AMBIENT LIGHT"
+                tools:text="AMBIENT LIGHT"
+                android:textSize="24dp"
                 android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@+id/app_tv" />
 
@@ -64,12 +75,12 @@
                 android:id="@+id/service_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/md_theme_light_primary"
                 android:drawableStart="@drawable/ic_clock"
                 android:drawablePadding="20dp"
                 android:padding="5dp"
-                android:text="Expires in 10 days"
+                tools:text="Expires in 10 days"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@+id/service_title_iv" />

@@ -1,7 +1,7 @@
-package com.skoda.launcher.model
+package com.skoda.launcher.data.source.response
 
 import com.google.gson.annotations.SerializedName
-import com.skoda.launcher.model.IncludedServices
+import java.util.Date
 
 
 data class Subscriptions(
@@ -14,7 +14,12 @@ data class Subscriptions(
     @SerializedName("price") var price: Double? = null,
     @SerializedName("includedServices") var includedServices: ArrayList<IncludedServices> = arrayListOf(),
     @SerializedName("status") var status: String? = null,
-    @SerializedName("startDate") var startDate: String? = null,
-    @SerializedName("endDate") var endDate: String? = null
+    @SerializedName("startDate") var startDate: Date? = null,
+    @SerializedName("endDate") var endDate: Date? = null
 
 )
+
+object SubscriptionStatus {
+    const val ACTIVATED = "Activated"
+    const val INACTIVE = "Inactive"
+}

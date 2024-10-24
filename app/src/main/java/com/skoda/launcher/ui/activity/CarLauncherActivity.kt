@@ -5,8 +5,6 @@ import android.os.Bundle
 import com.skoda.launcher.R
 import com.skoda.launcher.core.BaseActivity
 import com.skoda.launcher.databinding.ActivityCarLauncherBinding
-import com.skoda.launcher.ui.fragment.MapboxFragment
-import com.skoda.launcher.ui.fragment.MediaPlayerFragment
 import com.skoda.launcher.ui.fragment.ServiceListFragment
 import com.skoda.launcher.ui.viewmodel.CarViewModel
 
@@ -35,8 +33,6 @@ class CarLauncherActivity :
     }
 
     private fun initFragments() {
-        supportFragmentManager.beginTransaction().add(R.id.maps_card, MapboxFragment()).commit()
-        supportFragmentManager.beginTransaction().add(R.id.media_card, MediaPlayerFragment())
-            .commit()
+
     }
 }

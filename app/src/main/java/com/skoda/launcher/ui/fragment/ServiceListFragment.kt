@@ -3,75 +3,166 @@ package com.skoda.launcher.ui.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayout
 import com.skoda.launcher.R
-import com.skoda.launcher.api.APIService
 import com.skoda.launcher.core.BaseFragment
+import com.skoda.launcher.data.source.response.ApiResult
+import com.skoda.launcher.data.source.response.SubscriptionStatus
+import com.skoda.launcher.data.source.response.Subscriptions
 import com.skoda.launcher.databinding.FragmentServiceListBinding
 import com.skoda.launcher.ui.adapter.ServiceListAdapter
 import com.skoda.launcher.ui.viewmodel.ServiceViewModel
-import kotlinx.coroutines.Dispatchers
-import javax.inject.Inject
-
+import java.util.Objects.isNull
 
 /**
- * A simple [Fragment] subclass.
- * Use the [ServiceListFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Fragment for displaying a list of services and subscriptions.
+ *
+ * This fragment shows subscriptions in a tabbed layout, allowing users to filter
+ * between active subscriptions and all subscriptions. It observes the [ServiceViewModel]
+ * for updates and displays the data in a [RecyclerView].
  */
 class ServiceListFragment :
     BaseFragment<ServiceViewModel, FragmentServiceListBinding>(ServiceViewModel::class.java) {
+
     override fun getLayoutRes(): Int {
         return R.layout.fragment_service_list
     }
 
-    @Inject
-    lateinit var mAPIService: APIService
+    /**
+     * Boolean indicating whether to filter for active subscriptions.
+     */
+    private var mFilterActive: Boolean = true
 
+    /**
+     * Tag for logging purposes.
+     */
+    private val TAG: String = ServiceListFragment::class.java.simpleName
+
+    /**
+     * Adapter for displaying the list of subscriptions.
+     */
+    private lateinit var serviceListAdapter: ServiceListAdapter
+
+    /**
+     * List of all subscriptions retrieved from the API.
+     */
+    private var mAllSubscriptions: ArrayList<Subscriptions>? = null
+
+    /**
+     * Initializes the fragment and injects dependencies.
+     */
     override fun init() {
         super.init()
         mainApplication.component.inject(this)
     }
 
+    /**
+     * Called when the fragment's view is created. Sets up the tab layout and
+     * observes data from the ViewModel.
+     *
+     * @param view The view returned by [onCreateView].
+     * @param savedInstanceState A Bundle containing the activity's previously saved state.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupAdapter()
 
-        val apiData = liveData(Dispatchers.IO) {
-            try {
-                val retrivedTodo = mAPIService.getApi()
-                emit(retrivedTodo)
-            } catch (e: Exception) {
-                e.printStackTrace()
+        var activeTab = mBinding.tabLayout.newTab()
+        activeTab.text = getString(R.string.active_subscription)
+        mBinding.tabLayout.addTab(activeTab)
+
+        var allTab = mBinding.tabLayout.newTab()
+        allTab.text = getString(R.string.all)
+        mBinding.tabLayout.addTab(allTab)
+
+        mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                val isActive = tab == activeTab
+                mFilterActive = isActive
+                applyFilter(isActive)
             }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
+
+        storiesDataObserver()
+        viewModel.getSubscriptionsData()
+        setAdapter(arrayListOf())
+    }
+
+    /**
+     * Applies the active filter to the list of subscriptions.
+     *
+     * @param isActive Boolean indicating whether to filter for active subscriptions.
+     */
+    private fun applyFilter(isActive: Boolean) {
+        if (mAllSubscriptions == null) {
+            Log.i(TAG, "filter: subscription data not available")
+            return
         }
-        apiData.observe(viewLifecycleOwner) {
-            Log.i("TAG", "Test: api data" + it.body())
+        if (isActive) {
+            val filterData =
+                mAllSubscriptions!!.filter { it.status == SubscriptionStatus.ACTIVATED }
+            serviceListAdapter.setList(filterData)
+        } else {
+            serviceListAdapter.setList(mAllSubscriptions!!)
         }
     }
 
-    private fun setupAdapter() {
-        val services = mutableListOf<String>()
-        services.add("AMBIENT LIGHT")
-        services.add("Online Infotainment")
-        services.add("AMBIENT LIGHT")
-        services.add("AMBIENT LIGHT")
+    /**
+     * Observes the LiveData from the ViewModel to update the UI based on the
+     * API result.
+     */
+    private fun storiesDataObserver() {
+        viewModel.storiesLiveData.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is ApiResult.Loading -> {
+                    Log.i(TAG, "storiesDataObserver: loading ")
+                    // TODO: Show progress bar
+                }
 
-        services.add("AMBIENT LIGHT")
-        services.add("AMBIENT LIGHT 2")
-        services.add("AMBIENT LIGHT")
+                is ApiResult.Success -> {
+                    Log.i(TAG, "storiesDataObserver: Success ")
+                    if (!isNull(response.data)) {
+                        response.data?.let {
+                            mAllSubscriptions = it.subscriptions
+                            applyFilter(mFilterActive)
+                        }
+                    }
+                    // TODO: Hide progress bar
+                }
 
+                is ApiResult.Error -> {
+                    Log.i(TAG, "storiesDataObserver: Error ")
+                    // TODO: Hide progress bar
+                }
+
+                is ApiResult.Nothing -> {
+                    Log.i(TAG, "storiesDataObserver: Nothing ")
+                    // TODO: Hide progress bar
+                }
+            }
+        }
+    }
+
+    /**
+     * Sets up the RecyclerView with the provided list of subscriptions.
+     *
+     * @param subscriptions The list of subscriptions to display.
+     */
+    private fun setAdapter(subscriptions: ArrayList<Subscriptions>) {
         mBinding.serviceListRv.layoutManager =
             GridLayoutManager(requireContext(), 4, RecyclerView.VERTICAL, false)
-        mBinding.serviceListRv.adapter =
-            ServiceListAdapter(services, object : ServiceListAdapter.ServiceClickListener {
-                override fun onClickItem(service: String) {
+        serviceListAdapter =
+            ServiceListAdapter(subscriptions, object : ServiceListAdapter.ServiceClickListener {
+                override fun onClickItem(subscriptions: Subscriptions) {
                     requireActivity().supportFragmentManager.beginTransaction()
                         .add(R.id.fragment_container, ServicePurchaseFragment()).commit()
                 }
             })
+        mBinding.serviceListRv.adapter = serviceListAdapter
     }
 }

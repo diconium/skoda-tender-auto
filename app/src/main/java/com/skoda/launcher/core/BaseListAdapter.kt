@@ -3,9 +3,10 @@ package com.skoda.launcher.core
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.skoda.launcher.MainApplication
 import com.skoda.launcher.R
 
-abstract class BaseListAdapter<T>(private var list: List<T>) :
+abstract class BaseListAdapter<T>(@JvmField var list: List<T>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
