@@ -23,10 +23,13 @@ class ServiceDetailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupAdapter()
+
+        view.findViewById<View>(R.id.iv_renew_license).setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, ServicePurchaseFragment()).commit()
+
+        }
     }
 
-    private fun setupAdapter() {
 
-    }
 }

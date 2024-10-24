@@ -1,21 +1,27 @@
 package com.skoda.launcher.ui.activity
 
-import android.car.Car
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import com.skoda.launcher.R
+import com.skoda.launcher.core.BaseActivity
+import com.skoda.launcher.databinding.ActivityServiceBinding
 import com.skoda.launcher.ui.fragment.ServiceListFragment
+import com.skoda.launcher.ui.viewmodel.ServiceViewModel
 
-class ServiceActivity : AppCompatActivity() {
+class ServiceActivity :
+    BaseActivity<ServiceViewModel, ActivityServiceBinding>(ServiceViewModel::class.java) {
+    override fun initViewModel(viewModel: ServiceViewModel) {
+        binding.viewModel = viewModel
+    }
+
+    override fun getLayoutRes(): Int {
+        return R.layout.activity_service
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_service)
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().add(R.id.fragment_container, ServiceListFragment()).commit()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, ServiceListFragment()).commit()
         }
-
-        var car = Car.createCar(this)
-        // DriverDistractionManager.init(this, car)
     }
 }

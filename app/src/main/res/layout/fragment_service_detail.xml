@@ -10,7 +10,9 @@
         android:id="@+id/cl_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black">
+        android:background="@color/black"
+        android:clickable="true"
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_text_layout"
@@ -34,50 +36,55 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_pay_to_park_description">
 
-                <ImageView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/iv_renew_license"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_renew_license"
+                    android:layout_marginStart="20dp"
+                    android:text="Renew Subscription"
+                    android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintWidth_percent="0.5">
+                    app:layout_constraintWidth_percent="0.3">
 
-                </ImageView>
+                </com.google.android.material.button.MaterialButton>
 
-                <ImageView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/iv_extend_license"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
                     android:src="@drawable/btn_extend_service"
+                    android:text="Extend subscription for 1 year"
+                    app:backgroundTint="#23292e"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_renew_license"
-                    app:layout_constraintWidth_percent="0.5">
+                    app:layout_constraintWidth_percent="0.3">
 
-                </ImageView>
+                </com.google.android.material.button.MaterialButton>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:padding="20dp"
             app:layout_constraintStart_toEndOf="@+id/cl_text_layout"
             app:layout_constraintTop_toTopOf="parent"
-            android:padding="20dp"
             app:layout_constraintWidth_percent="0.28">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="#161718"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
 
                 <LinearLayout

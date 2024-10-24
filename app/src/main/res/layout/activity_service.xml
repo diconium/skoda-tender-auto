@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.skoda.launcher.ui.viewmodel.ServiceViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

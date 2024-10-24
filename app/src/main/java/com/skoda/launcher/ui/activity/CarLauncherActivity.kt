@@ -26,7 +26,7 @@ class CarLauncherActivity :
     }
 
     private fun setupClickListeners() {
-        binding.toolbar.setOnClickListener {
+        binding.homeLy.setOnClickListener {
             //supportFragmentManager.beginTransaction().add(android.R.id.content, ServiceListFragment()).commit()
            startActivity(Intent(this@CarLauncherActivity, ServiceActivity::class.java))
         }

@@ -14,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [PurchaseAddCardFragment.newInstance] factory method to
+ * Use the [PaymentMethodeSelectionFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PurchaseAddCardFragment : Fragment() {
+class PaymentMethodeSelectionFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,17 @@ class PurchaseAddCardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_purchase_add_card, container, false)
+        return inflater.inflate(R.layout.fragment_payment_method_selection, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<View>(R.id.next_button).setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, AutoRenewalFragment()).commit()
+
+        }
     }
 
 }
