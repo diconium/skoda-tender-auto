@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <!-- todo 001 application theme Theme.Material3.DayNight. -->
+    <!-- todo support light theme Theme.Material3.DayNight. -->
 
     <style name="AppTheme" parent="Theme.Material3.Dark">
         <!-- Customize your theme here. -->
@@ -18,6 +18,9 @@
         <item name="colorControlNormal">#FFFFFF</item>
         <item name="colorControlActivated">@color/md_theme_light_primary</item>
         <item name="colorControlHighlight">@color/md_theme_light_primary</item>
+
+        <item name="android:fontFamily">@font/skoda_next_regular</item>
+        <item name="fontFamily">@font/skoda_next_regular</item>
     </style>
 
     <style name="Splash" parent="Theme.Material3.DayNight.NoActionBar">

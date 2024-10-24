@@ -1,8 +1,7 @@
 package com.skoda.launcher.di.module
 
 import android.os.Environment
-import com.skoda.launcher.api.APIConfig
-import com.skoda.launcher.api.APIService
+import com.skoda.launcher.data.source.remote.config.APIConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -16,7 +15,10 @@ import retrofit2.Retrofit
 import com.google.gson.Gson
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
-import com.skoda.launcher.api.TelematicsApiService
+import com.skoda.launcher.data.source.remote.TelematicsApiService
+import com.skoda.launcher.data.source.remote.SubscriptionsApi
+import com.skoda.launcher.utils.convertor.DateDeserializer
+import java.util.Date
 
 
 @Module
@@ -48,6 +50,7 @@ class NetModule {
     fun provideGson(): Gson {
         val gsonBuilder = GsonBuilder()
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        gsonBuilder.registerTypeAdapter(Date::class.java, DateDeserializer())
         return gsonBuilder.create()
     }
 
@@ -61,17 +64,6 @@ class NetModule {
     }
 
     /**
-     * API service
-     */
-    @Provides
-    @Singleton
-   fun provideService( builder:Retrofit.Builder) : APIService {
-        return builder.baseUrl(APIConfig.API_URL)
-                .build()
-                .create(APIService::class.java)
-    }
-
-    /**
      * Telematics related API service
      */
     @Provides
@@ -80,5 +72,16 @@ class NetModule {
         return builder.baseUrl(APIConfig.API_URL)
                 .build()
                 .create(TelematicsApiService::class.java)
+    }
+
+    /**
+     * Sub related API service
+     */
+    @Provides
+    @Singleton
+   fun provideSubscriptionsService( builder:Retrofit.Builder) : SubscriptionsApi {
+        return builder.baseUrl(APIConfig.API_URL)
+                .build()
+                .create(SubscriptionsApi::class.java)
     }
 }

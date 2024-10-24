@@ -76,9 +76,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     implementation("androidx.paging:paging-runtime:$paging_version")
-    implementation 'com.mapbox.maps:android:11.3.1'
-    implementation "com.mapbox.navigationcore:navigation:3.0.2"
-    implementation "com.mapbox.navigationcore:ui-components:3.0.2"
-    implementation "com.mapbox.search:place-autocomplete:2.1.0"
+    implementation 'com.squareup.picasso:picasso:2.8'
 
 }

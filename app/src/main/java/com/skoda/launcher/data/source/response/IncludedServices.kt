@@ -1,4 +1,4 @@
-package com.skoda.launcher.model
+package com.skoda.launcher.data.source.response
 
 import com.google.gson.annotations.SerializedName
 
