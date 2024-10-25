@@ -5,12 +5,10 @@ on:
     branches:
       - main
       - dev
-      - feature_subscription_service_ui
   pull_request:
     branches:
       - main
       - dev
-      - feature_subscription_service_ui
 jobs:
   build:
     runs-on: ubuntu-latest

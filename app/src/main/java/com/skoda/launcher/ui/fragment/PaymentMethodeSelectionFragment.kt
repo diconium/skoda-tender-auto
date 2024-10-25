@@ -5,14 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.skoda.launcher.R
+import com.skoda.launcher.ui.viewmodel.ServiceViewModel
 
 
 class PaymentMethodeSelectionFragment : Fragment() {
 
 
+    var isFinishByOrderClick = false
+    private lateinit var viewModel: ServiceViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel =
+            ViewModelProvider(requireActivity()).get(ServiceViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -33,7 +40,15 @@ class PaymentMethodeSelectionFragment : Fragment() {
         }
 
         view.findViewById<View>(R.id.back_btn).setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            isFinishByOrderClick = true
+            requireActivity().finish()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (!isFinishByOrderClick) {
+            viewModel.sendNotification()
         }
     }
 

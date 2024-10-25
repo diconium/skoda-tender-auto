@@ -68,10 +68,10 @@ class ServiceViewModel(application: Application) : BaseViewModel(application) {
                 subscriptions = values.data?.subscriptions
                 responseSubscriptions.value = values
             }
-        getDriver()
+        getDriverState()
     }
 
-    fun getDriver() {
+    fun getDriverState() {
         driverDistractionUseCase.getCarDrivingState().observeForever {
             Log.i("TAG", "getDriver:getCarDrivingState " + it)
         }

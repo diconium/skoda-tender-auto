@@ -21,20 +21,23 @@ class PaymentReviewFragment :
             processOrderAction()
         }
         val backBtnListener: (v: View) -> Unit = {
-            requireActivity().supportFragmentManager.popBackStack()
+            requireActivity().finish()
         }
         view.findViewById<View>(R.id.back_btn).setOnClickListener(backBtnListener)
         view.findViewById<View>(R.id.back_btn_prev).setOnClickListener(backBtnListener)
-        viewModel.subscriptionState.observe(viewLifecycleOwner) {
-            if (it == true) {
-                requireActivity().finish()
-                viewModel.subscriptionState.value = null
-            }
-        }
     }
 
+    var isFinishByOrderClick = false
     private fun processOrderAction() {
-        viewModel.sendNotification()
+        isFinishByOrderClick = true
+        requireActivity().finish()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (!isFinishByOrderClick) {
+            viewModel.sendNotification()
+        }
     }
 
 }

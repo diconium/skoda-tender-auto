@@ -1,15 +1,26 @@
 package com.skoda.launcher.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.skoda.launcher.R
+import com.skoda.launcher.ui.viewmodel.ServiceViewModel
 
 
 class AutoRenewalFragment : Fragment() {
 
+    var isFinishByOrderClick = false
+    private lateinit var viewModel: ServiceViewModel
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel =
+            ViewModelProvider(requireActivity()).get(ServiceViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,8 +35,8 @@ class AutoRenewalFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<View>(R.id.next_button).setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, PaymentReviewFragment()).addToBackStack(null).commit()
+            isFinishByOrderClick = true
+            requireActivity().finish()
 
         }
 
@@ -34,6 +45,13 @@ class AutoRenewalFragment : Fragment() {
         }
         view.findViewById<View>(R.id.back_btn).setOnClickListener(backBtnListener)
         view.findViewById<View>(R.id.back_btn_prev).setOnClickListener(backBtnListener)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (!isFinishByOrderClick) {
+            viewModel.sendNotification()
+        }
     }
 
 }
