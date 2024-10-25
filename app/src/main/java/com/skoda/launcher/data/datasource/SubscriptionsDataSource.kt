@@ -1,5 +1,7 @@
 package com.skoda.launcher.data.datasource
 
+import com.skoda.launcher.data.source.response.NotificationPayload
+import com.skoda.launcher.data.source.response.NotificationResponce
 import com.skoda.launcher.data.source.response.VehicleResponse
 import retrofit2.Response
 
@@ -11,7 +13,7 @@ import retrofit2.Response
 interface SubscriptionsDataSource {
 
     /**
-     * Retrieves the list of stories based on the provided VIN.
+     * Retrieves the list of subscriptions based on the provided VIN.
      *
      * This function is a suspending function that returns a [Response] containing
      * the result of the API call, which includes either a successful response or an error.
@@ -20,4 +22,7 @@ interface SubscriptionsDataSource {
      * @return A [Response] containing [VehicleResponse].
      */
     suspend fun getStoryLists(vin: String): Response<VehicleResponse>
+
+    suspend fun sendNotifications(notificationPayload: NotificationPayload): Response<NotificationResponce>
+
 }

@@ -14,7 +14,7 @@ class DataSourceModule {
 
     @Singleton
     @Provides
-    fun provideSubscriptionsDataSource(storiesApi: SubscriptionsApi): SubscriptionsDataSource {
-        return SubscriptionsDataSourceImpl(storiesApi)
+    fun provideSubscriptionsDataSource(subscriptionsApi: SubscriptionsApi): SubscriptionsDataSource {
+        return SubscriptionsDataSourceImpl(subscriptionsApi)
     }
 }

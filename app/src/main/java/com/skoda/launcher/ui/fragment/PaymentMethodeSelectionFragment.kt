@@ -7,16 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.skoda.launcher.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PaymentMethodeSelectionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PaymentMethodeSelectionFragment : Fragment() {
 
 
@@ -37,8 +28,12 @@ class PaymentMethodeSelectionFragment : Fragment() {
 
         view.findViewById<View>(R.id.next_button).setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, AutoRenewalFragment()).commit()
+                .add(R.id.fragment_container, AutoRenewalFragment()).addToBackStack(null).commit()
 
+        }
+
+        view.findViewById<View>(R.id.back_btn).setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 

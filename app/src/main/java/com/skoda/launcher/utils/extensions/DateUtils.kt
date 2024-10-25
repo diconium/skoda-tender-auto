@@ -25,7 +25,7 @@ object DateUtils {
         }
     }
 
-    private fun dateFormater(date: Date): String {
+    fun dateFormater(date: Date): String {
         val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         val formattedDate = formatter.format(date)
         return formattedDate;

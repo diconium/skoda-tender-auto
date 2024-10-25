@@ -1,8 +1,6 @@
 package com.skoda.launcher.di.module
 
-import android.car.Car
-import android.content.Context
-import com.skoda.launcher.domain.manager.DriverDistractionManager
+import com.skoda.launcher.domain.manager.DriverRestrictionManager
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -12,7 +10,7 @@ class DriverDistractionModule {
 
     @Provides
     @Singleton
-    fun provideDriverDistractionManager(): DriverDistractionManager {
-        return DriverDistractionManager.getInstance()
+    fun provideDriverDistractionManager(): DriverRestrictionManager {
+        return DriverRestrictionManager.getInstance()
     }
 }

@@ -1,60 +1,40 @@
 package com.skoda.launcher.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.skoda.launcher.R
+import com.skoda.launcher.core.BaseFragment
+import com.skoda.launcher.databinding.FragmentPaymentReviewBinding
+import com.skoda.launcher.ui.viewmodel.ServiceViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class PaymentReviewFragment :
+    BaseFragment<ServiceViewModel, FragmentPaymentReviewBinding>(ServiceViewModel::class.java) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PaymentReviewFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class PaymentReviewFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override fun getLayoutRes(): Int {
+        return R.layout.fragment_payment_review
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<View>(R.id.order_button).setOnClickListener {
+            processOrderAction()
+        }
+        val backBtnListener: (v: View) -> Unit = {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+        view.findViewById<View>(R.id.back_btn).setOnClickListener(backBtnListener)
+        view.findViewById<View>(R.id.back_btn_prev).setOnClickListener(backBtnListener)
+        viewModel.subscriptionState.observe(viewLifecycleOwner) {
+            if (it == true) {
+                requireActivity().finish()
+                viewModel.subscriptionState.value = null
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_payment_review, container, false)
+    private fun processOrderAction() {
+        viewModel.sendNotification()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PaymentReviewFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PaymentReviewFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

@@ -15,7 +15,7 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun providesSubscriptionsRepository(storiesDataSource: SubscriptionsDataSource): SubscriptionsRepository {
-        return SubscriptionsRepositoryImpl(storiesDataSource)
+    fun providesSubscriptionsRepository(subscriptionsDataSource: SubscriptionsDataSource): SubscriptionsRepository {
+        return SubscriptionsRepositoryImpl(subscriptionsDataSource)
     }
 }

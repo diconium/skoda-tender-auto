@@ -1,6 +1,8 @@
 package com.skoda.launcher.data.source.remote
 
 
+import com.skoda.launcher.data.source.response.NotificationPayload
+import com.skoda.launcher.data.source.response.NotificationResponce
 import com.skoda.launcher.data.source.response.VehicleResponse
 import retrofit2.Response
 import retrofit2.http.*
@@ -22,6 +24,6 @@ interface SubscriptionsApi {
     @GET("subscriptions/{vin}/status")
     suspend fun getSubscriptions(@Path("vin") vin: String): Response<VehicleResponse>
 
-   /* @GET("https://jsonkeeper.com/b/G057")
-    suspend fun getSubscriptions(): Response<VehicleResponse>*/
+    @POST("/notifications/send")
+    suspend fun sendNotifications(@Body notificationPayload: NotificationPayload): Response<NotificationResponce>
 }

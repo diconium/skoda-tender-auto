@@ -1,12 +1,12 @@
 package com.skoda.launcher.domain.usecase
 
 import androidx.lifecycle.LiveData
-import com.skoda.launcher.domain.manager.DriverDistractionManager
+import com.skoda.launcher.domain.manager.DriverRestrictionManager
 import android.car.drivingstate.CarDrivingStateEvent
 import android.car.drivingstate.CarUxRestrictions
 
 
-class DriverDistractionUseCase(private val distractionManager: DriverDistractionManager) {
+class DriverDistractionUseCase(private val distractionManager: DriverRestrictionManager) {
 
     /**
      * Exposes the car driving state as LiveData.

@@ -29,6 +29,7 @@
         </TextView>
 
         <ImageView
+            android:id="@+id/back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
@@ -140,28 +141,9 @@
         app:layout_constraintVertical_bias="0.8">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/next_button_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/next_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:text="Next"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent">
-
-            </com.google.android.material.button.MaterialButton>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/progress_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/next_button_layout">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/page_indicator"
@@ -169,7 +151,9 @@
                 android:layout_height="wrap_content"
                 android:text="1/3"
                 android:textColor="@color/white"
-                android:textSize="41sp"
+                android:textSize="30sp"
+                android:paddingTop="25dp"
+                android:paddingLeft="15dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -180,13 +164,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:text="Payment information"
+                android:text="Payment Information"
                 android:textColor="@color/white"
-                android:textSize="41sp"
+                android:paddingTop="35dp"
+                android:textSize="25sp"
                 android:textStyle="bold"
+                android:paddingRight="20dp"
                 app:layout_constraintStart_toEndOf="@+id/page_indicator">
 
             </TextView>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/next_button"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:layout_marginEnd="25dp"
+                android:textSize="30dp"
+                android:text="Next"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent">
+
+            </com.google.android.material.button.MaterialButton>
 
             <ProgressBar
                 android:id="@+id/progress_bar"

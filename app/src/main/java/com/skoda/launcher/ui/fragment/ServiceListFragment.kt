@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.skoda.launcher.R
 import com.skoda.launcher.core.BaseFragment
@@ -15,6 +16,7 @@ import com.skoda.launcher.databinding.FragmentServiceListBinding
 import com.skoda.launcher.ui.adapter.ServiceListAdapter
 import com.skoda.launcher.ui.viewmodel.ServiceViewModel
 import java.util.Objects.isNull
+
 
 /**
  * Fragment for displaying a list of services and subscriptions.
@@ -88,7 +90,10 @@ class ServiceListFragment :
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
 
-        storiesDataObserver()
+        mBinding.backBtn.setOnClickListener {
+            requireActivity().finish()
+        }
+        subscriptionsDataObserver()
         viewModel.getSubscriptionsData()
         setAdapter(arrayListOf())
     }
@@ -116,33 +121,30 @@ class ServiceListFragment :
      * Observes the LiveData from the ViewModel to update the UI based on the
      * API result.
      */
-    private fun storiesDataObserver() {
-        viewModel.storiesLiveData.observe(viewLifecycleOwner) { response ->
+    private fun subscriptionsDataObserver() {
+        viewModel.subscriptionsLiveData.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is ApiResult.Loading -> {
-                    Log.i(TAG, "storiesDataObserver: loading ")
-                    // TODO: Show progress bar
+                    Log.i(TAG, "subscriptionsDataObserver: loading ")
                 }
-
                 is ApiResult.Success -> {
-                    Log.i(TAG, "storiesDataObserver: Success ")
                     if (!isNull(response.data)) {
                         response.data?.let {
                             mAllSubscriptions = it.subscriptions
                             applyFilter(mFilterActive)
                         }
                     }
-                    // TODO: Hide progress bar
                 }
-
                 is ApiResult.Error -> {
-                    Log.i(TAG, "storiesDataObserver: Error ")
-                    // TODO: Hide progress bar
+                    Log.i(TAG, "subscriptionsDataObserver: Error " + response.message)
+                    Snackbar.make(
+                        mBinding.serviceListRv, getString(R.string.error_message, response.message),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
 
                 is ApiResult.Nothing -> {
-                    Log.i(TAG, "storiesDataObserver: Nothing ")
-                    // TODO: Hide progress bar
+                    Log.i(TAG, "subscriptionsDataObserver: Nothing ")
                 }
             }
         }
@@ -160,7 +162,7 @@ class ServiceListFragment :
             ServiceListAdapter(subscriptions, object : ServiceListAdapter.ServiceClickListener {
                 override fun onClickItem(subscriptions: Subscriptions) {
                     requireActivity().supportFragmentManager.beginTransaction()
-                        .add(R.id.fragment_container, ServiceDetailFragment()).commit()
+                        .add(R.id.fragment_container, ServiceDetailFragment.getInstance(subscriptions.id!!)).commit()
                 }
             })
         mBinding.serviceListRv.adapter = serviceListAdapter

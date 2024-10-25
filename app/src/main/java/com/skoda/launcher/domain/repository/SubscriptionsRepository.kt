@@ -1,6 +1,8 @@
 package com.skoda.launcher.domain.repository
 
 import com.skoda.launcher.data.source.response.ApiResult
+import com.skoda.launcher.data.source.response.NotificationPayload
+import com.skoda.launcher.data.source.response.NotificationResponce
 import com.skoda.launcher.data.source.response.VehicleResponse
 import kotlinx.coroutines.flow.Flow
 
@@ -12,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 interface SubscriptionsRepository {
 
     /**
-     * Fetches the list of stories as a [Flow] of [ApiResult].
+     * Fetches the list of subscriptions as a [Flow] of [ApiResult].
      *
      * This function is a suspending function that returns a flow of the API result,
      * which may contain either a successful response or an error.
@@ -20,4 +22,7 @@ interface SubscriptionsRepository {
      * @return A [Flow] emitting [ApiResult] of [VehicleResponse].
      */
     suspend fun fetchStoryList(): Flow<ApiResult<VehicleResponse>>
+
+    suspend fun sendNotifications(payload: NotificationPayload): Flow<ApiResult<NotificationResponce>>
+
 }

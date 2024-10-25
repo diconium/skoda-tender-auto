@@ -7,7 +7,7 @@ import com.skoda.launcher.databinding.ActivityServiceBinding
 import com.skoda.launcher.ui.fragment.ServiceListFragment
 import com.skoda.launcher.ui.viewmodel.ServiceViewModel
 
-class ServiceActivity :
+class SubscriptionActivity :
     BaseActivity<ServiceViewModel, ActivityServiceBinding>(ServiceViewModel::class.java) {
     override fun initViewModel(viewModel: ServiceViewModel) {
         binding.viewModel = viewModel

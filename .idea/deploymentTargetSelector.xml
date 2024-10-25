@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-24T18:02:45.708841500Z">
+        <DropdownSelection timestamp="2024-10-25T02:23:24.136795200Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=0c07b00e82894a94" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\emb-vinomaa\.android\avd\EMB_EMU.avd" />
             </handle>
           </Target>
         </DropdownSelection>

@@ -119,7 +119,7 @@
             android:background="@drawable/gradient_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline_tab"
-            tools:context=".ui.activity.ServiceActivity"></FrameLayout>
+            tools:context=".ui.activity.SubscriptionActivity"></FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

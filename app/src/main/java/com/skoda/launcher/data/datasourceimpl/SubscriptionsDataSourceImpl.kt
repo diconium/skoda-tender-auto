@@ -2,6 +2,8 @@ package com.skoda.launcher.data.datasourceimpl
 
 import com.skoda.launcher.data.source.remote.SubscriptionsApi
 import com.skoda.launcher.data.datasource.SubscriptionsDataSource
+import com.skoda.launcher.data.source.response.NotificationPayload
+import com.skoda.launcher.data.source.response.NotificationResponce
 import com.skoda.launcher.data.source.response.VehicleResponse
 import retrofit2.Response
 
@@ -14,7 +16,7 @@ import retrofit2.Response
 class SubscriptionsDataSourceImpl(private var api: SubscriptionsApi) : SubscriptionsDataSource {
 
     /**
-     * Retrieves the list of stories based on the provided VIN.
+     * Retrieves the list of subscriptions based on the provided VIN.
      *
      * This function calls the API to get subscriptions data associated with the given VIN.
      *
@@ -23,5 +25,10 @@ class SubscriptionsDataSourceImpl(private var api: SubscriptionsApi) : Subscript
      */
     override suspend fun getStoryLists(vin: String): Response<VehicleResponse> {
         return api.getSubscriptions(vin)
+    }
+
+
+    override suspend fun sendNotifications(notificationPayload: NotificationPayload): Response<NotificationResponce> {
+        return api.sendNotifications(notificationPayload)
     }
 }

@@ -1,7 +1,7 @@
 package com.skoda.launcher.di.component.di
 
 
-import com.skoda.launcher.domain.manager.DriverDistractionManager
+import com.skoda.launcher.domain.manager.DriverRestrictionManager
 import com.skoda.launcher.domain.repository.SubscriptionsRepository
 import com.skoda.launcher.domain.usecase.DriverDistractionUseCase
 import com.skoda.launcher.domain.usecase.SubscriptionsUseCase
@@ -15,14 +15,14 @@ class UseCaseModule {
 
     @Singleton
     @Provides
-    fun provideSubscriptionsUseCase(storiesRepository: SubscriptionsRepository): SubscriptionsUseCase {
-        return SubscriptionsUseCase(storiesRepository)
+    fun provideSubscriptionsUseCase(subscriptionsRepository: SubscriptionsRepository): SubscriptionsUseCase {
+        return SubscriptionsUseCase(subscriptionsRepository)
     }
 
     @Singleton
     @Provides
-    fun provideDriverUseCase(driverDistractionManager: DriverDistractionManager): DriverDistractionUseCase {
-        return DriverDistractionUseCase(driverDistractionManager)
+    fun provideDriverUseCase(driverRestrictionManager: DriverRestrictionManager): DriverDistractionUseCase {
+        return DriverDistractionUseCase(driverRestrictionManager)
     }
 
 }

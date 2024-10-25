@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,35 +16,76 @@
         android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_back_btn_white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/toolbar_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp"
+                android:paddingTop="30dp"
+                tools:text="Pay to Park"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/back_btn">
+
+            </TextView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_text_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="70dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.72">
 
             <TextView
-                android:id="@+id/tv_pay_to_park_description"
+                android:id="@+id/tv_description"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:gravity="left"
                 android:padding="20dp"
-                android:text="@string/description_pay_to_park"
+                tools:text="@string/description_pay_to_park"
                 android:textColor="@color/white"
                 android:textSize="28sp"
-                app:layout_constraintHeight_percent="0.7"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_expired_description"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="left"
+                android:padding="20dp"
+                tools:text="Your subscription expires on 03.11.24. You can extend your at any time"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_pay_to_park_description">
+                app:layout_constraintTop_toBottomOf="@+id/tv_expired_description">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/iv_renew_license"
+                    android:id="@+id/renew_sub_btn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -64,7 +106,7 @@
                     android:text="Extend subscription for 1 year"
                     app:backgroundTint="#23292e"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/iv_renew_license"
+                    app:layout_constraintStart_toEndOf="@+id/renew_sub_btn"
                     app:layout_constraintWidth_percent="0.3">
 
                 </com.google.android.material.button.MaterialButton>
@@ -74,6 +116,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
             android:padding="20dp"
             app:layout_constraintStart_toEndOf="@+id/cl_text_layout"
             app:layout_constraintTop_toTopOf="parent"
@@ -94,11 +137,12 @@
                     android:weightSum="1">
 
                     <ImageView
+                        android:id="@+id/subscription_banner_iv"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.5"
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_pay_to_park">
+                        tools:src="@drawable/ic_pay_to_park">
 
                     </ImageView>
 
@@ -109,8 +153,10 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/subscription_title_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:padding="4dp"
                             android:text="@string/pay_to_park"
                             android:textColor="@color/white"
@@ -119,12 +165,13 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/subscription_desc_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:padding="4dp"
-                            android:text="@string/parking_fee_description"
-                            android:textSize="28sp">
-
+                            android:textSize="28sp"
+                            tools:text="@string/parking_fee_description">
                         </TextView>
                     </LinearLayout>
 

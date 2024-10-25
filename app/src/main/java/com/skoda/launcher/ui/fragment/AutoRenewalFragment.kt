@@ -7,11 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.skoda.launcher.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 
 class AutoRenewalFragment : Fragment() {
 
@@ -30,9 +25,15 @@ class AutoRenewalFragment : Fragment() {
 
         view.findViewById<View>(R.id.next_button).setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, PaymentReviewFragment()).commit()
+                .add(R.id.fragment_container, PaymentReviewFragment()).addToBackStack(null).commit()
 
         }
+
+        val backBtnListener: (v: View) -> Unit = {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+        view.findViewById<View>(R.id.back_btn).setOnClickListener(backBtnListener)
+        view.findViewById<View>(R.id.back_btn_prev).setOnClickListener(backBtnListener)
     }
 
 }

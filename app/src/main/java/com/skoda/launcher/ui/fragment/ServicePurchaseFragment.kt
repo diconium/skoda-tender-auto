@@ -1,10 +1,10 @@
 package com.skoda.launcher.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.skoda.launcher.R
 
 class ServicePurchaseFragment : Fragment() {
@@ -26,8 +26,13 @@ class ServicePurchaseFragment : Fragment() {
 
         view.findViewById<View>(R.id.next_button).setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, PaymentMethodeSelectionFragment()).commit()
+                .add(R.id.fragment_container, PaymentMethodeSelectionFragment())
+                .addToBackStack(null).commit()
 
+        }
+
+        view.findViewById<View>(R.id.back_btn).setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 }
