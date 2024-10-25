@@ -30,6 +30,15 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew assembleRelease
+
+      - name: Create artifacts directory
+        run: mkdir -p ${{ github.workspace }}/artifacts
         
-      - name: List APK directory contents
-        run: ls -la app/build/outputs/apk/release/
+      - name: Copy APK to artifacts directory
+        run: cp app/build/outputs/apk/release/app-release.apk ${{ github.workspace }}/artifacts/
+
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release.apk
+          path: ${{ github.workspace }}/artifacts/
