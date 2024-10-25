@@ -22,7 +22,7 @@ android {
 
     signingConfigs {
         platform {
-            storeFile file('C:\\security\\nxp_platform.keystore')
+            storeFile file("../keystore/nxp_platform.keystore")
             storePassword 'platform'
             keyAlias 'platform'
             keyPassword 'android'
