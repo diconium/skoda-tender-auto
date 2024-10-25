@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="launcher_card_corner_radius">10dp</dimen>
+    <dimen name="main_screen_widget_margin">16dp</dimen>
+    <dimen name="widget_media_btn">35dp</dimen>
+    <dimen name="media_art_width">100dp</dimen>
+</resources>
